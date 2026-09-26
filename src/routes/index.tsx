@@ -115,9 +115,9 @@ function HomePage() {
   return (
     <div className="overflow-x-clip bg-background pb-20 md:pb-0">
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
-        <div className="mx-auto grid h-[4.5rem] max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:px-8 lg:px-10">
+        <div className="mx-auto grid h-[4.5rem] max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:px-10">
           <a href="#top" className="min-w-0 font-display text-xl text-foreground sm:text-2xl">Gabriela Zięba</a>
-          <nav aria-label="Główna nawigacja" className="hidden items-center gap-8 lg:flex">
+          <nav aria-label="Główna nawigacja" className="hidden min-w-0 items-center justify-center gap-8 lg:flex">
             <a className="nav-link" href="#pomoc">Zakres pomocy</a>
             <a className="nav-link" href="#o-mnie">O mnie</a>
             <a className="nav-link" href="#kwalifikacje">Kwalifikacje</a>
@@ -132,7 +132,7 @@ function HomePage() {
       </header>
 
       <section id="top" className="relative">
-        <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-7xl items-center gap-12 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-12 sm:px-8 sm:py-16 lg:min-h-[48rem] lg:grid-cols-[1.08fr_0.92fr] lg:px-10 lg:py-20">
           <div className="relative z-10 max-w-3xl animate-soft-rise">
             <p className="eyebrow text-primary">Fizjoterapia <span aria-hidden="true">•</span> Kraków</p>
             <h1 className="mt-6 max-w-3xl font-display text-[clamp(3rem,6vw,5.8rem)] leading-[0.98] text-foreground">Fizjoterapia, która zaczyna się od <em className="font-normal text-primary">zrozumienia</em> Twojego ciała.</h1>
