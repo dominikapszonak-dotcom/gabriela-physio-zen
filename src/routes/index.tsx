@@ -7,18 +7,8 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 import { ZnanyLekarzWidget } from "@/components/ZnanyLekarzWidget";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 
-import certBuccal from "@/assets/certyfikat-masaz-transbukalny.jpg.asset.json";
-import certKobido from "@/assets/certyfikat-physio-kobido.jpg.asset.json";
-import certDeep from "@/assets/certyfikat-deep-tissue.jpg.asset.json";
-import certGuaSha from "@/assets/certyfikat-gua-sha.jpg.asset.json";
-import certRakowski from "@/assets/dyplom-terapia-manualna-rakowskiego.jpg.asset.json";
-import certCcat from "@/assets/certyfikat-ccat.jpg.asset.json";
-import certUro from "@/assets/certyfikat-uroginekologia.jpg.asset.json";
-import certRak1 from "@/assets/rakowski-modul-1.jpg.asset.json";
-import certRak2 from "@/assets/rakowski-modul-2.jpg.asset.json";
-import certRak3 from "@/assets/rakowski-modul-3.jpg.asset.json";
-
 const portrait = `${import.meta.env.BASE_URL}images/gabriela-zieba.jpg`;
+const image = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
 
 const BOOKING_URL = "https://www.znanylekarz.pl/gabriela-zieba/fizjoterapeuta/krakow";
 const BOOKING_ANCHOR = "#rezerwacja";
@@ -57,16 +47,16 @@ const specialties = [
 ];
 
 const certificates = [
-  { src: certBuccal.url, title: "Masaż transbukalny twarzy", shape: "portrait" },
-  { src: certKobido.url, title: "PhysioKOBIDO", shape: "landscape" },
-  { src: certDeep.url, title: "Masaż tkanek głębokich w ujęciu klinicznym", shape: "portrait" },
-  { src: certGuaSha.url, title: "Gua Sha — face massage", shape: "portrait" },
-  { src: certRakowski.url, title: "Terapia Manualna Rakowskiego", shape: "portrait" },
-  { src: certCcat.url, title: "Dysfunkcje kompleksu CCAT", shape: "portrait" },
-  { src: certUro.url, title: "Diagnostyka i terapia w uroginekologii", shape: "portrait" },
-  { src: certRak1.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł I", shape: "portrait" },
-  { src: certRak2.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł II", shape: "portrait" },
-  { src: certRak3.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł III", shape: "portrait" },
+  { src: image("certyfikat-masaz-transbukalny.jpg"), title: "Masaż transbukalny twarzy", shape: "portrait" },
+  { src: image("certyfikat-physio-kobido.jpg"), title: "PhysioKOBIDO", shape: "landscape" },
+  { src: image("certyfikat-deep-tissue.jpg"), title: "Masaż tkanek głębokich w ujęciu klinicznym", shape: "portrait" },
+  { src: image("certyfikat-gua-sha.jpg"), title: "Gua Sha — face massage", shape: "portrait" },
+  { src: image("dyplom-terapia-manualna-rakowskiego.jpg"), title: "Terapia Manualna Rakowskiego", shape: "portrait" },
+  { src: image("certyfikat-ccat.jpg"), title: "Dysfunkcje kompleksu CCAT", shape: "portrait" },
+  { src: image("certyfikat-uroginekologia.jpg"), title: "Diagnostyka i terapia w uroginekologii", shape: "portrait" },
+  { src: image("rakowski-modul-1.jpg"), title: "Kurs Terapii Manualnej Rakowskiego — moduł I", shape: "portrait" },
+  { src: image("rakowski-modul-2.jpg"), title: "Kurs Terapii Manualnej Rakowskiego — moduł II", shape: "portrait" },
+  { src: image("rakowski-modul-3.jpg"), title: "Kurs Terapii Manualnej Rakowskiego — moduł III", shape: "portrait" },
 ];
 
 const services = [
