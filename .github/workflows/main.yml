@@ -33,13 +33,37 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Find built website
+        run: |
+          echo "Looking for generated website files..."
+          find . -maxdepth 5 -type f -name "index.html" -print
+
+      - name: Prepare GitHub Pages
+        run: |
+          mkdir -p site
+
+          if [ -d ".output/public" ] && [ -f ".output/public/index.html" ]; then
+            cp -R .output/public/. site/
+          elif [ -d "dist" ] && [ -f "dist/index.html" ]; then
+            cp -R dist/. site/
+          else
+            echo "ERROR: Could not find a static website output."
+            echo "Contents of .output:"
+            ls -la .output 2>/dev/null || true
+            echo "Contents of project:"
+            ls -la
+            exit 1
+          fi
+
+          touch site/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./site
 
   deploy:
     environment:
