@@ -110,7 +110,7 @@ export const Route = createFileRoute("/")({
 function BookingButton({ label = "Umów wizytę", className = "" }: { label?: string; className?: string }) {
   return (
     <Button asChild size="lg" className={`h-12 rounded-full px-6 text-[0.72rem] font-semibold uppercase tracking-[0.16em] shadow-none ${className}`}>
-      <a href={BOOKING_URL} target="_blank" rel="noreferrer">{label}<ArrowUpRight aria-hidden="true" /></a>
+      <a href={BOOKING_ANCHOR}>{label}<ArrowRight aria-hidden="true" /></a>
     </Button>
   );
 }
