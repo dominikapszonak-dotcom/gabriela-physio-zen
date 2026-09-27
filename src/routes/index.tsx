@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ZnanyLekarzWidget } from "@/components/ZnanyLekarzWidget";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
-import portrait from "@/assets/gabriela-zieba.jpg.asset.json";
+
 import certBuccal from "@/assets/certyfikat-masaz-transbukalny.jpg.asset.json";
 import certKobido from "@/assets/certyfikat-physio-kobido.jpg.asset.json";
 import certDeep from "@/assets/certyfikat-deep-tissue.jpg.asset.json";
@@ -17,6 +17,8 @@ import certUro from "@/assets/certyfikat-uroginekologia.jpg.asset.json";
 import certRak1 from "@/assets/rakowski-modul-1.jpg.asset.json";
 import certRak2 from "@/assets/rakowski-modul-2.jpg.asset.json";
 import certRak3 from "@/assets/rakowski-modul-3.jpg.asset.json";
+
+const portrait = `${import.meta.env.BASE_URL}images/gabriela-zieba.jpg`;
 
 const BOOKING_URL = "https://www.znanylekarz.pl/gabriela-zieba/fizjoterapeuta/krakow";
 const BOOKING_ANCHOR = "#rezerwacja";
@@ -163,7 +165,7 @@ function HomePage() {
           </div>
           <div className="relative mx-auto w-full max-w-[34rem] lg:mr-0">
             <div className="portrait-frame relative aspect-[4/5] overflow-hidden bg-secondary">
-              <img src={portrait.url} alt="mgr Gabriela Zięba, fizjoterapeutka w Krakowie" className="h-full w-full object-cover object-[50%_25%]" fetchPriority="high" />
+              <img src={portrait} alt="mgr Gabriela Zięba, fizjoterapeutka w Krakowie" className="h-full w-full object-cover object-[50%_25%]" fetchPriority="high" />
             </div>
             <div className="absolute -bottom-5 -left-2 border border-border bg-background px-5 py-4 shadow-soft sm:-left-8 sm:px-6">
               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Specjalizacja</p>
@@ -204,7 +206,7 @@ function HomePage() {
       <section id="o-mnie" className="section-space scroll-mt-24">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-start lg:gap-24 lg:px-10">
           <div className="relative lg:sticky lg:top-28">
-            <div className="aspect-[4/5] overflow-hidden rounded-t-[9rem] bg-secondary sm:rounded-t-[13rem]"><img src={portrait.url} alt="Gabriela Zięba — fizjoterapeutka" className="h-full w-full object-cover object-[48%_25%]" loading="lazy" /></div>
+            <div className="aspect-[4/5] overflow-hidden rounded-t-[9rem] bg-secondary sm:rounded-t-[13rem]"><img src={portrait} alt="Gabriela Zięba — fizjoterapeutka" className="h-full w-full object-cover object-[48%_25%]" loading="lazy" /></div>
             <p className="mt-4 text-xs uppercase tracking-[0.16em] text-muted-foreground">Uważność · wiedza · indywidualne podejście</p>
           </div>
           <div>
