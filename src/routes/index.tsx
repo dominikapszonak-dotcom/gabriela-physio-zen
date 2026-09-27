@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Instagram, MapPin, Quote } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Instagram, Mail, Phone } from "lucide-react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ZnanyLekarzWidget } from "@/components/ZnanyLekarzWidget";
+import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import portrait from "@/assets/gabriela-zieba.jpg.asset.json";
 import certBuccal from "@/assets/certyfikat-masaz-transbukalny.jpg.asset.json";
 import certKobido from "@/assets/certyfikat-physio-kobido.jpg.asset.json";
@@ -12,8 +14,12 @@ import certGuaSha from "@/assets/certyfikat-gua-sha.jpg.asset.json";
 import certRakowski from "@/assets/dyplom-terapia-manualna-rakowskiego.jpg.asset.json";
 import certCcat from "@/assets/certyfikat-ccat.jpg.asset.json";
 import certUro from "@/assets/certyfikat-uroginekologia.jpg.asset.json";
+import certRak1 from "@/assets/rakowski-modul-1.jpg.asset.json";
+import certRak2 from "@/assets/rakowski-modul-2.jpg.asset.json";
+import certRak3 from "@/assets/rakowski-modul-3.jpg.asset.json";
 
 const BOOKING_URL = "https://www.znanylekarz.pl/gabriela-zieba/fizjoterapeuta/krakow";
+const BOOKING_ANCHOR = "#rezerwacja";
 const INSTAGRAM_URL = "https://www.instagram.com/physio.gabi/";
 
 const concerns = [
@@ -56,15 +62,17 @@ const certificates = [
   { src: certRakowski.url, title: "Terapia Manualna Rakowskiego", shape: "portrait" },
   { src: certCcat.url, title: "Dysfunkcje kompleksu CCAT", shape: "portrait" },
   { src: certUro.url, title: "Diagnostyka i terapia w uroginekologii", shape: "portrait" },
+  { src: certRak1.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł I", shape: "portrait" },
+  { src: certRak2.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł II", shape: "portrait" },
+  { src: certRak3.url, title: "Kurs Terapii Manualnej Rakowskiego — moduł III", shape: "portrait" },
 ];
 
 const services = [
   { name: "Fizjoterapia stawów skroniowo-żuchwowych", price: "220 zł", detail: "Wizyta dla osób z bólem lub zaburzeniami pracy stawów skroniowo-żuchwowych." },
   { name: "Fizjoterapia stomatologiczna", price: "220 zł", detail: "Praca z napięciem mięśni twarzy, żuchwy i skroni, także podczas leczenia stomatologicznego lub ortodontycznego." },
   { name: "Fizjoterapia szczękowo-twarzowa", price: "220–250 zł", detail: "Indywidualnie dobrane wsparcie w dolegliwościach obszaru twarzy, szczęki i szyi." },
-  { name: "Masaż twarzy Kobido", price: "250 zł", detail: "Manualna praca z tkankami twarzy w spokojnej, komfortowej atmosferze." },
-  { name: "Fizjoterapia estetyczna", price: "220 zł", detail: "Terapia manualna i techniki pracy z napięciami dobrane do potrzeb pacjenta." },
   { name: "Masaż Kobido", price: "250 zł", detail: "Wielowymiarowy masaż twarzy oparty na technikach manualnych." },
+  { name: "Fizjoterapia estetyczna", price: "220 zł", detail: "Terapia manualna i techniki pracy z napięciami dobrane do potrzeb pacjenta." },
   { name: "Masaż Kobido + taping", price: "280 zł", detail: "Masaż Kobido uzupełniony indywidualnie dobraną aplikacją tapingu." },
   { name: "Masaż relaksacyjny całego ciała", price: "300 zł", detail: "Spokojna sesja nastawiona na rozluźnienie i odpoczynek." },
 ];
@@ -75,6 +83,12 @@ const reviews = [
   { author: "Julia", service: "Fizjoterapia stomatologiczna", text: "Bardzo ciepła i empatyczna osoba. Dużo tłumaczy i ma kompleksowe podejście do leczenia! Już dwie wizyty zrobiły dużą różnicę." },
   { author: "Natalia Habigier", service: "Fizjoterapia stawów skroniowo-żuchwowych", text: "Pani Gabriela mocno zainteresowana problemem pacjenta, z pełnym zaangażowaniem szuka rozwiązania i doradza, jakie kroki podjąć w dalszej perspektywie." },
   { author: "Darek", service: "Fizjoterapia stawów skroniowo-żuchwowych", text: "Bardzo profesjonalne i — co najważniejsze — niezwykle uczciwe podejście do pacjenta. Pani Gabriela przeprowadziła dokładne badanie… Największy plus za rzetelność." },
+  { author: "Miłosz", service: "Fizjoterapia stomatologiczna", text: "Wizyta u tej fizjoterapeutki to była czysta przyjemność. Pełen profesjonalizm i świetne podejście do pacjenta. Pani posiada ogromną wiedzę i dokładnie wytłumaczyła mi, skąd biorą się moje bóle mięśnia żwacza i jak styl życia oraz emocje wpływają na ciało. Sam zabieg przyniósł mi natychmiastową ulgę." },
+  { author: "Anita", service: "Masaż twarzy Kobido", text: "Czułam się zaopiekowana i zrelaksowana w profesjonalnych rękach pani Gabrieli." },
+  { author: "Sylwia", service: "Fizjoterapia stawów skroniowo-żuchwowych", text: "Na wizycie u Pani Gabrieli pierwszy raz miałam poczucie, że ktoś naprawdę chce znaleźć przyczynę problemu i pomóc… Pani Gabriela przeprowadziła bardzo szczegółowy wywiad i badanie. Wszystko tłumaczyła spokojnie, konkretnie i bez pośpiechu." },
+  { author: "Beata", service: "Fizjoterapia stawów skroniowo-żuchwowych", text: "Przyszłam do Pani Gabrieli z problemem bruksizmu oraz napięcia w stawach skroniowo-żuchwowych i jestem bardzo zadowolona, że trafiłam właśnie do niej. Jej podejście jest bardzo profesjonalne, wszystko dokładnie i rzeczowo wyjaśnia, ma ogromną wiedzę, a dodatkowo pokazuje jak samodzielnie wykonywać ćwiczenia w domu." },
+  { author: "Izabela", service: "Fizjoterapia stomatologiczna", text: "Serdecznie polecam panią Gabrielę. Byłam już na kilku wizytach i chętnie umawiam kolejną, bo widzę znaczącą poprawę w napięciu moich żwaczy (i nie tylko). Wszystko jest świetnie wyjaśnione…" },
+  { author: "Dominika P.", service: "Fizjoterapia stomatologiczna", text: "Jestem zachwycona podejściem Pani Gabrysi do moich problemów. Jest łagodna, ale bardzo rzeczowa i niesamowicie sympatyczna oraz wyrozumiała… Problem został potraktowany holistycznie wraz ze wskazówkami jak samodzielnie mogę sobie z nim radzić." },
 ];
 
 export const Route = createFileRoute("/")({
