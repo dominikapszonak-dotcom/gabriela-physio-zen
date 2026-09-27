@@ -140,7 +140,7 @@ function HomePage() {
           </nav>
           <BookingButton className="hidden sm:inline-flex" />
           <Button asChild size="sm" className="h-10 rounded-full px-4 text-[0.65rem] font-semibold uppercase tracking-[0.12em] shadow-none sm:hidden">
-            <a href={BOOKING_URL} target="_blank" rel="noreferrer">Umów wizytę</a>
+            <a href={BOOKING_ANCHOR}>Umów wizytę</a>
           </Button>
         </div>
       </header>
@@ -167,13 +167,13 @@ function HomePage() {
             </div>
             <div className="absolute -bottom-5 -left-2 border border-border bg-background px-5 py-4 shadow-soft sm:-left-8 sm:px-6">
               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Specjalizacja</p>
-              <p className="mt-1 font-display text-lg text-foreground">twarz, głowa i szyja</p>
+              <p className="mt-1 font-display text-lg text-foreground">Fizjoterapia stomatologiczna</p>
             </div>
           </div>
         </div>
         <div className="border-y border-border bg-secondary/55">
           <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-border px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8 lg:px-10">
-            {["mgr fizjoterapii", "specjalizacja: twarz, głowa i szyja", "Kraków"].map((item, index) => (
+            {["mgr fizjoterapii", "Fizjoterapia stomatologiczna", "Kraków"].map((item, index) => (
               <div key={item} className="flex min-h-20 items-center gap-4 py-4 sm:justify-center sm:px-5"><span className="font-display text-xl text-primary">0{index + 1}</span><span className="text-xs uppercase tracking-[0.13em] text-foreground">{item}</span></div>
             ))}
           </div>
@@ -197,7 +197,7 @@ function HomePage() {
           <div className="mt-14 grid border-y border-border lg:grid-cols-3 lg:divide-x lg:divide-border">
             {specialties.map((item) => <article key={item.number} className="group border-b border-border py-9 last:border-b-0 lg:border-b-0 lg:px-8 lg:first:pl-0 lg:last:pr-0"><p className="font-display text-2xl text-primary/65">{item.number}</p><h3 className="mt-10 max-w-xs font-display text-3xl leading-tight text-foreground">{item.title}</h3><p className="mt-5 text-sm leading-7 text-muted-foreground">{item.text}</p></article>)}
           </div>
-          <Button asChild variant="link" className="mt-8 h-auto px-0 py-2 text-xs uppercase tracking-[0.15em] no-underline hover:no-underline"><a href={BOOKING_URL} target="_blank" rel="noreferrer">Umów wizytę <ArrowRight aria-hidden="true" /></a></Button>
+          <Button asChild variant="link" className="mt-8 h-auto px-0 py-2 text-xs uppercase tracking-[0.15em] no-underline hover:no-underline"><a href={BOOKING_ANCHOR}>Umów wizytę <ArrowRight aria-hidden="true" /></a></Button>
         </div>
       </section>
 
@@ -269,10 +269,9 @@ function HomePage() {
 
       <section id="opinie" className="section-space scroll-mt-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><SectionIntro eyebrow="53 opinie na ZnanymLekarzu" title="Pacjenci o mojej pracy" /><Button asChild variant="link" className="h-auto w-fit px-0 text-xs uppercase tracking-[0.13em]"><a href={BOOKING_URL} target="_blank" rel="noreferrer">Zobacz wszystkie opinie <ArrowUpRight aria-hidden="true" /></a></Button></div>
-          <div className="hide-scrollbar -mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:px-0">
-            {reviews.map((review, index) => <figure key={review.author} className={`flex w-[84vw] shrink-0 snap-start flex-col border border-border bg-card p-7 sm:w-[25rem] lg:w-auto ${index >= 3 ? "lg:col-span-1" : ""}`}><Quote className="size-7 text-primary/55" aria-hidden="true" /><blockquote className="mt-8 flex-1 font-display text-xl leading-8 text-foreground">„{review.text}”</blockquote><figcaption className="mt-8 border-t border-border pt-5"><p className="text-sm font-semibold text-foreground">{review.author}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{review.service}</p></figcaption></figure>)}
-          </div>
+          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><SectionIntro eyebrow="Opinie pacjentów · 53 opinie na ZnanymLekarzu" title="Pacjenci o mojej pracy" /></div>
+          <ReviewsCarousel reviews={reviews} />
+          <Button asChild variant="link" className="mt-6 h-auto px-0 text-xs uppercase tracking-[0.13em]"><a href={BOOKING_URL} target="_blank" rel="noreferrer">Zobacz wszystkie opinie na ZnanymLekarzu <ArrowRight aria-hidden="true" /></a></Button>
           <p className="mt-5 text-xs leading-5 text-muted-foreground">Opinie pochodzą z publicznego profilu ZnanyLekarz. Rezultaty terapii mogą różnić się u poszczególnych osób.</p>
         </div>
       </section>
@@ -284,26 +283,34 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="bg-foreground py-24 text-background sm:py-32">
+      <section id="rezerwacja" className="scroll-mt-20 bg-foreground py-24 text-background sm:py-32">
         <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
           <p className="eyebrow text-background/55">Umów wizytę</p>
           <h2 className="mt-6 font-display text-5xl leading-[1.02] text-background sm:text-6xl lg:text-7xl">Zadbajmy o większy komfort Twojego ciała.</h2>
           <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-background/70">Jeśli chcesz lepiej zrozumieć swoje dolegliwości i rozpocząć indywidualnie dobraną terapię, zapraszam na wizytę.</p>
-          <Button asChild size="lg" className="mt-9 h-14 rounded-full bg-background px-7 text-xs uppercase tracking-[0.14em] text-foreground shadow-none hover:bg-background/90"><a href={BOOKING_URL} target="_blank" rel="noreferrer">Umów wizytę na ZnanymLekarzu <ArrowUpRight aria-hidden="true" /></a></Button>
+          <div className="mt-14 rounded-[var(--radius)] bg-background p-5 text-left text-foreground sm:p-8">
+            <h3 className="font-display text-3xl text-foreground sm:text-4xl">Gotowa na wizytę?</h3>
+            <p className="mt-2 text-sm text-muted-foreground">Umów wizytę bezpośrednio online.</p>
+            <div className="mt-6 min-h-[24rem]"><ZnanyLekarzWidget /></div>
+          </div>
+          <p className="mt-8 text-sm text-background/65">Wolisz umówić wizytę przez ZnanyLekarz?</p>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-2 text-sm text-background underline-offset-4 hover:underline">Zobacz profil Gabrieli na ZnanymLekarzu <ArrowUpRight className="size-4" aria-hidden="true" /></a>
+          <p className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-background/55"><a href="tel:+48502434351" className="hover:text-background">502 434 351</a><a href="mailto:gabrie.zieba@gmail.com" className="hover:text-background">gabrie.zieba@gmail.com</a></p>
         </div>
       </section>
 
       <footer className="bg-background">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 md:grid-cols-[1fr_auto_auto] md:items-end lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 md:grid-cols-[1fr_auto_auto_auto] md:items-end lg:px-10">
           <div><p className="font-display text-2xl text-foreground">mgr Gabriela Zięba</p><p className="mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">Fizjoterapia <span aria-hidden="true">•</span> Kraków</p></div>
           <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-foreground hover:text-primary"><Instagram className="size-4" aria-hidden="true" /> @physio.gabi</a>
+          <div className="flex flex-col gap-2 text-sm"><a href="tel:+48502434351" className="inline-flex items-center gap-2 text-foreground hover:text-primary"><Phone className="size-4" aria-hidden="true" /> 502 434 351</a><a href="mailto:gabrie.zieba@gmail.com" className="inline-flex items-center gap-2 text-foreground hover:text-primary"><Mail className="size-4" aria-hidden="true" /> gabrie.zieba@gmail.com</a></div>
           <BookingButton />
-          <p className="text-xs text-muted-foreground md:col-span-3">© 2026 Gabriela Zięba</p>
+          <p className="text-xs text-muted-foreground md:col-span-4">© 2026 Gabriela Zięba</p>
         </div>
       </footer>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 p-3 backdrop-blur-xl md:hidden">
-        <Button asChild size="lg" className="h-12 w-full rounded-full text-xs uppercase tracking-[0.14em] shadow-none"><a href={BOOKING_URL} target="_blank" rel="noreferrer">Umów wizytę <ArrowUpRight aria-hidden="true" /></a></Button>
+        <Button asChild size="lg" className="h-12 w-full rounded-full text-xs uppercase tracking-[0.14em] shadow-none"><a href={BOOKING_ANCHOR}>Umów wizytę <ArrowRight aria-hidden="true" /></a></Button>
       </div>
     </div>
   );
